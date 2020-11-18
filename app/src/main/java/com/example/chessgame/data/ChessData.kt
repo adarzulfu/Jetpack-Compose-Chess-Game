@@ -7,7 +7,7 @@ import com.example.chessgame.R
 import java.util.*
 
 data class BoardMember(
-        var chessPiece: ChessPiece?,
+        var chessPiece: ChessPiece? = null,
         var isSelected: Boolean = false,
         val id: UUID = UUID.randomUUID()
 )

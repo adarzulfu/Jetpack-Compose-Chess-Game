@@ -3,12 +3,16 @@ package com.example.chessgame.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Layout
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
@@ -17,6 +21,8 @@ import androidx.core.graphics.component2
 import com.example.chessgame.data.ChessViewModel
 import kotlin.math.ceil
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.LinearGradient
+import androidx.ui.tooling.preview.Preview
 
 import com.example.chessgame.data.BoardMember
 
@@ -62,10 +68,10 @@ fun ChessBoardPlacer(
 
 @Composable
 fun ChessBoard(viewModel: ChessViewModel) {
-    ChessBoardPlacer(modifier = Modifier.fillMaxWidth()) {
-        for (i in 0 until CHESS_BOARD_SIZE) {
-            val boardMember = viewModel.squareList[i]
-            if (viewModel.squareList.isNotEmpty()) {
+    if (viewModel.squareList.isNotEmpty()) {
+        ChessBoardPlacer(modifier = Modifier.fillMaxWidth()) {
+            for (i in viewModel.squareList.indices) {
+                val boardMember = viewModel.squareList[i]
                 BoardSquare(backgroundColor = bringBoxColor(i, boardMember),
                         boardMember = boardMember,
                         onClick = viewModel::onSquareSelected
@@ -76,13 +82,17 @@ fun ChessBoard(viewModel: ChessViewModel) {
 }
 
 @Composable
-fun BoardSquare(backgroundColor: Color, boardMember: BoardMember, onClick: (item: BoardMember) -> Unit) {
-    var localBackgroundColor = backgroundColor
+fun BoardSquare(modifier: Modifier = Modifier,
+                backgroundColor: Color,
+                boardMember: BoardMember,
+                onClick: (item: BoardMember) -> Unit) {
 
-    Box(Modifier.background(localBackgroundColor).clickable(onClick = { onClick.invoke(boardMember) }), alignment = Alignment.Center) {
+    Box(modifier = modifier
+            .background(backgroundColor)
+            .clickable(onClick = { onClick.invoke(boardMember) }),
+            alignment = Alignment.Center) {
         boardMember.chessPiece?.let {
-            Image(
-                    vectorResource(id = it.id),
+            Image(asset = vectorResource(id = it.id),
                     modifier = Modifier.padding(
                             start = 10.dp,
                             top = 10.dp,
@@ -91,6 +101,17 @@ fun BoardSquare(backgroundColor: Color, boardMember: BoardMember, onClick: (item
             )
         }
     }
+
+}
+
+@Preview
+@Composable
+fun BoardSquarePreview() {
+    BoardSquare(modifier = Modifier.size(50.dp),
+            backgroundColor = Color.Green,
+            boardMember = BoardMember(),
+            onClick = {}
+    )
 }
 
 fun bringBoxColor(currentPosition: Int, boardMember: BoardMember): Color {
