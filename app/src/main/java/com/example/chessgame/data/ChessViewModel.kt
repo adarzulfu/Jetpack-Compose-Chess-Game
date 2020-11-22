@@ -20,16 +20,22 @@ class ChessViewModel : ViewModel() {
 
     fun onSquareSelected(boardMember: BoardMember) {
         if (selectedChessItemPosition == -1) {
-            selectedChessItemPosition = squareList.indexOf(boardMember)
-            squareList = squareList.toMutableList().also {
-                it[selectedChessItemPosition] = BoardMember(isSelected = true, chessPiece = boardMember.chessPiece)
+            boardMember.chessPiece?.apply {
+                selectedChessItemPosition = squareList.indexOf(boardMember)
+                squareList = squareList.toMutableList().also {
+                    it[selectedChessItemPosition] = BoardMember(isSelected = true, chessPiece = boardMember.chessPiece)
+                }
             }
 
         } else {
-            val currentSelectedPosition = squareList.indexOf(boardMember)
+            val nextPosition = squareList.indexOf(boardMember)
             squareList = squareList.toMutableList().also {
-                it[currentSelectedPosition] = squareList[selectedChessItemPosition].apply { isSelected = false }
-                it[selectedChessItemPosition] = BoardMember(null)
+                if (nextPosition != selectedChessItemPosition) {
+                    it[nextPosition] = squareList[selectedChessItemPosition].apply { isSelected = false }
+                    it[selectedChessItemPosition] = BoardMember(null)
+                } else {
+                    it[selectedChessItemPosition] = BoardMember(isSelected = false, chessPiece = boardMember.chessPiece)
+                }
             }
             selectedChessItemPosition = -1
         }

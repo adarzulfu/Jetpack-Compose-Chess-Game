@@ -68,7 +68,7 @@ fun ChessBoard(viewModel: ChessViewModel) {
         ChessBoardPlacer(modifier = Modifier.fillMaxWidth()) {
             for (i in list.indices) {
                 val boardMember = list[i]
-                BoardSquare(backgroundColor = bringBoxColor(i, boardMember),
+                BoardSquare(backgroundColor = bringBoxColor(i, boardMember.isSelected),
                   boardMember = boardMember,
                   onClick = viewModel::onSquareSelected
                 )
@@ -113,14 +113,18 @@ fun BoardSquarePreview() {
     )
 }
 
-fun bringBoxColor(currentPosition: Int, boardMember: BoardMember): Color {
+fun bringBoxColor(currentPosition: Int, isSelected: Boolean): Color {
     val currentRow = currentPosition / COLUMN_COUNT
-    return if (boardMember.chessPiece != null && boardMember.isSelected) {
-        Color.Green
-    } else if ((currentPosition + currentRow) % 2 == 0) {
-        chessWhite
-    } else {
-        chessBlack
+    return when {
+        isSelected -> {
+            Color.Green
+        }
+        (currentPosition + currentRow) % 2 == 0 -> {
+            chessWhite
+        }
+        else -> {
+            chessBlack
+        }
     }
 }
 
