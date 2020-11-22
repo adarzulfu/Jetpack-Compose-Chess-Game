@@ -3,6 +3,7 @@ package com.example.chessgame.presentation.chess_game
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -65,10 +66,10 @@ fun ChessBoardPlacer(
 fun ChessBoard(viewModel: ChessViewModel) {
     val list = viewModel.squareList
     if (list.isNotEmpty()) {
-        ChessBoardPlacer(modifier = Modifier.fillMaxWidth()) {
+        ChessBoardPlacer(modifier = Modifier.fillMaxWidth().border(3.dp, Color.Black)) {
             for (i in list.indices) {
                 val boardMember = list[i]
-                BoardSquare(backgroundColor = bringBoxColor(i, boardMember.isSelected),
+                BoardSquare(backgroundColor = getBoxColor(i, boardMember.isSelected),
                   boardMember = boardMember,
                   onClick = viewModel::onSquareSelected
                 )
@@ -113,7 +114,7 @@ fun BoardSquarePreview() {
     )
 }
 
-fun bringBoxColor(currentPosition: Int, isSelected: Boolean): Color {
+fun getBoxColor(currentPosition: Int, isSelected: Boolean): Color {
     val currentRow = currentPosition / COLUMN_COUNT
     return when {
         isSelected -> {
