@@ -17,7 +17,6 @@ import androidx.core.graphics.component1
 import androidx.core.graphics.component2
 import kotlin.math.ceil
 import androidx.compose.ui.graphics.Color
-import androidx.ui.tooling.preview.Preview
 
 import com.example.chessgame.ui.chessBlack
 import com.example.chessgame.ui.chessWhite
@@ -102,16 +101,6 @@ fun BoardSquare(modifier: Modifier = Modifier,
         }
     }
 
-}
-
-@Preview
-@Composable
-fun BoardSquarePreview() {
-    BoardSquare(modifier = Modifier.size(50.dp),
-      backgroundColor = Color.Green,
-      boardMember = BoardMember(),
-      onClick = {}
-    )
 }
 
 fun getBoxColor(currentPosition: Int, isSelected: Boolean): Color {
