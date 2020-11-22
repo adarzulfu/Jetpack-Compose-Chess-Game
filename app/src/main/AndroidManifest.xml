@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChessGame">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.chess_game.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.ChessGame.NoActionBar">
             <intent-filter>

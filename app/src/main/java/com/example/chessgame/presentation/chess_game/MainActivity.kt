@@ -1,11 +1,9 @@
-package com.example.chessgame
+package com.example.chessgame.presentation.chess_game
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
-import com.example.chessgame.ui.ChessBoard
 import androidx.activity.viewModels
-import com.example.chessgame.data.ChessViewModel
 
 class MainActivity : AppCompatActivity() {
 

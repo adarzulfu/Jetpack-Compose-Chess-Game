@@ -1,4 +1,4 @@
-package com.example.chessgame.ui
+package com.example.chessgame.presentation.chess_game
 
 
 import androidx.compose.foundation.Image
@@ -14,12 +14,12 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.component1
 import androidx.core.graphics.component2
-import com.example.chessgame.data.ChessViewModel
 import kotlin.math.ceil
 import androidx.compose.ui.graphics.Color
 import androidx.ui.tooling.preview.Preview
 
-import com.example.chessgame.data.BoardMember
+import com.example.chessgame.ui.chessBlack
+import com.example.chessgame.ui.chessWhite
 
 const val CHESS_BOARD_SIZE = 64
 const val COLUMN_COUNT = 8

@@ -1,13 +1,13 @@
-package com.example.chessgame.data
+package com.example.chessgame.presentation.chess_game
 
 import androidx.annotation.DrawableRes
 import com.example.chessgame.R
 import java.util.*
 
 data class BoardMember(
-        var chessPiece: ChessPiece? = null,
-        var isSelected: Boolean = false,
-        val id: UUID = UUID.randomUUID()
+  var chessPiece: ChessPiece? = null,
+  var isSelected: Boolean = false,
+  val id: UUID = UUID.randomUUID()
 )
 
 enum class ChessPiece(@DrawableRes val id: Int) {

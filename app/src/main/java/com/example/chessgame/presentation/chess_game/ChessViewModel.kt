@@ -1,4 +1,4 @@
-package com.example.chessgame.data
+package com.example.chessgame.presentation.chess_game
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
