@@ -1,5 +1,6 @@
 package com.example.chessgame.presentation.chess_piece_profile
 
+import android.os.CountDownTimer
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +18,18 @@ class PieceViewModel : ViewModel() {
         private set
 
     fun initPieceListData() {
-        _pieceList.value = pieceListData
-        pieceListState = pieceListData
+
+        object : CountDownTimer((pieceListData.size * 1000).toLong(), 1000) {
+            var counter = 1
+            override fun onTick(millisUntilFinished: Long) {
+                _pieceList.value = pieceListData.subList(0, counter).toMutableList()
+                pieceListState = pieceListData.subList(0, counter).toMutableList()
+                counter++
+            }
+
+            override fun onFinish() {
+
+            }
+        }.start()
     }
 }

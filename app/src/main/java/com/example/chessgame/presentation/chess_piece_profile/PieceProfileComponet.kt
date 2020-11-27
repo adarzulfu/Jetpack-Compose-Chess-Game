@@ -27,6 +27,7 @@ import androidx.ui.tooling.preview.Preview
 import com.example.chessgame.R
 import com.example.chessgame.ui.ChessGameTheme
 import com.example.chessgame.ui.chessBlack
+import java.util.*
 
 @Composable
 fun PawnProfile() {
@@ -73,10 +74,9 @@ fun PawnProfilePreview() {
     }
 }
 
-fun randomColor(): Color {
-    val colors = arrayOf(Color.Black, Color.Yellow, Color.Green, Color.Blue)
-    val randomIndex = (0..3).shuffled().first()
-    return colors[randomIndex]
+fun randomColor(): androidx.compose.ui.graphics.Color {
+    val rnd = Random()
+    return Color(android.graphics.Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)))
 }
 
 @Preview
